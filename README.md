@@ -15,7 +15,7 @@ SCB can be instantiated with any block cipher and compression function, and this
 SCB Mode defines two parameters, $\sigma$ and $\tau$, and it requires $\sigma+\tau\leq n$.
 The first affects *security*, while the second affects *correctness*.
 More concretely, SCB guarantees semantic security, provided **the total number $\beta$ of blocks of $n$ bits of the encrypted plaintexts does not exceed $2^\sigma$**.
-This is because SCB uses $\sigma$ bits for counters used when blocks of plaintext are repeated.
+This is because SCB uses $\sigma$ bits for counters that keep track of repeated blocks of plaintext.
 Reasonable values for $\sigma$ are dictated by the following equation:
 $$\log\beta\leq\sigma\leq n-2\log\beta.$$
 On the other hand, SCB internally compresses each block of plaintext into a hash value of $\tau$ bits, and therefore reasonable values for $\tau$ are dictated by the following equation:
@@ -31,7 +31,7 @@ See the paper for a more in-depth explanation.
 
 ### Compiling and Running
 
-Running `make` in Linux or `compile.bat` in Windows will generate **two** executables: `bin/scb_file[.exe]` and `bin/scb_image[.exe]`.
+Running `make` in Linux or `compile.bat` in Windows (in a [developer command prompt](https://learn.microsoft.com/en-us/cpp/build/building-on-the-command-line)) will generate **two** executables: `bin/scb_file[.exe]` and `bin/scb_image[.exe]`.
 The program `scb_file` allows to encrypt any file, while `scb_image` allows to *visually* encrypt PNG images (only the color stream is encrypted), and is only meant for demonstration purposes.
 
 The syntax for `scb_file` is as follows:
@@ -58,7 +58,7 @@ The options and inputs are explained in detail in the table below.
 The syntax for `scb_image` is as follows:
 
 ```sh
-./scb_file enc[+]|dec|ecb max_count max_hash key_file input_file.png [verbose]
+./scb_image enc[+]|dec|ecb max_count max_hash key_file input_file.png [verbose]
 ```
 
 The options and inputs follow the specification of `scb_file`, with the exceptions explained in the table below.
