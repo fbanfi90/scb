@@ -8,7 +8,7 @@ More precisely, encrypting a message $m$ into a ciphertext $c$ and later decrypt
 But crucially, this only happens with *negligible probability*, if the parameters $\sigma$ and $\tau$ defined by SCB are appropriately chosen.
 This choice strongly depends on the setting in which an instance of SCB is meant to be used.
 For more details, see the paper appearing in [IACR Transactions on Symmetric Cryptology, Volume 2022, Issue 4](https://crypto.ethz.ch/publications/files/Banfi22.pdf).
-SCB can be instantiated with any block cipher and compression function, and this code specifically implements SCB with $n=128$ as $\textsf{SCB}[\texttt{AES-128},\texttt{SHA-256}]$, where the output of SHA is truncated to $\tau$ bits.
+SCB can be instantiated with any block cipher and compression function, and this code specifically implements SCB with $n=128$ as $\textsf{SCB}[\texttt{AES-128},[\cdot]_\tau\circ\texttt{SHA-256}]$, where the output of SHA is truncated to $\tau$ bits.
 
 ## SCB Parameters
 
