@@ -29,8 +29,6 @@ See the paper for a more in-depth explanation.
 
 ## Code
 
-> **Important:** Currently, `scb.c` uses the input key as _both_ the block cipher key ($K_1$) and the pad key ($K_2$). This clearly should be avoided, and an updated version of the code will use a PRG to first expand the key (or simply require a longer key to be input).
-
 ### Compiling and Running
 
 Running `make` in Linux or `compile.bat` in Windows (in a [developer command prompt](https://learn.microsoft.com/en-us/cpp/build/building-on-the-command-line)) will generate **two** executables: `bin/scb_file[.exe]` and `bin/scb_image[.exe]`.
@@ -85,6 +83,8 @@ When run, the test will print `OK` for each generated file `{cor,sec}/file.png` 
 ## Notice
 
 The code is provided without any warranty and has *not* been written with efficiency in mind.
+
+> **Important:** Currently, `scb.c` uses the input key as _both_ the block cipher key $K_1$ and the pad key $K_2$. This clearly should be avoided, and an updated version of the code will use a PRG to first expand the key (or simply require a longer key to be input).
 
 [OpenSSL]: <https://www.openssl.org/>
 [hashmap.c]: <https://github.com/tidwall/hashmap.c>
