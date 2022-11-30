@@ -17,10 +17,10 @@ The first affects *security*, while the second affects *correctness*.
 More concretely, SCB guarantees semantic security, provided **the total number $\beta$ of blocks of $n$ bits of the encrypted plaintexts does not exceed $2^\sigma$**.
 This is because SCB uses $\sigma$ bits for counters that keep track of repeated blocks of plaintext.
 Reasonable values for $\sigma$ are dictated by the following equation:
-$$\log\beta\leq\sigma\leq n-2\log\beta.$$
+$$\log\beta\leq\sigma\ll n-2\log\beta.$$
 On the other hand, SCB internally compresses each block of plaintext into a hash value of $\tau$ bits, and therefore reasonable values for $\tau$ are dictated by the following equation:
-$$2\log\beta\leq\tau\leq n-\sigma.$$
-Together, these two equations govern the trade-off between security and correctness.
+$$2\log\beta\ll\tau\leq n-\sigma.$$
+Together, these two equations govern the trade-off between security and correctness, and they also make it clear that $\sigma$ needs to be _minimized_, while $\tau$ needs to be _maximized_.
 For example, for this implementation with $n=128$, if it can be estimated that $\beta\leq2^{10}$, then a reasonable choice of parameters would be $\sigma=10$ and $\tau=108$.
 If instead it can be estimated that $\beta\leq2^{20}$, then a reasonable choice of parameters would be $\sigma=20$ and $\tau=108$.
 See the paper for a more in-depth explanation.
@@ -28,6 +28,8 @@ See the paper for a more in-depth explanation.
 > **Note:** since currently the code only allows to instantiate $\sigma$ and $\tau$ as **multiples of 8**, the above parameters choice for the case of $\beta\leq2^{20}$ should be either $\sigma=24$ and $\tau=104$ (``max_count = 3`` and ``max_hash = 13``, see below) or $\sigma=16$ and $\tau=116$ (``max_count = 2`` and ``max_hash = 14``).
 
 ## Code
+
+> **Important:** Currently, `scb.c` uses the input key as _both_ the block cipher key ($K_1$) and the pad key ($K_2$). This clearly should be avoided, and an updated version of the code will use a PRG to first expand the key (or simply require a longer key to be input).
 
 ### Compiling and Running
 
