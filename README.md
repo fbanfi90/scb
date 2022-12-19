@@ -7,7 +7,7 @@ This is possible because SCB allows decryption _not_ to be perfect.
 More precisely, encrypting a message $m$ into a ciphertext $c$ and later decrypting $c$ might result in message $m'$ different from $m$.
 But crucially, this only happens with *negligible probability*, if the parameters $\sigma$ and $\tau$ defined by SCB are appropriately chosen.
 This choice strongly depends on the setting in which an instance of SCB is meant to be used.
-For more details, see the paper appearing in [IACR Transactions on Symmetric Cryptology, Volume 2022, Issue 4](https://crypto.ethz.ch/publications/files/Banfi22.pdf).
+For more details, see the paper appearing in [IACR Transactions on Symmetric Cryptology, Volume 2022, Issue 4](https://tosc.iacr.org/index.php/ToSC/article/view/9970).
 SCB can be instantiated with any block cipher and compression function, and this code specifically implements SCB with $n=128$ as $\textsf{SCB}[\texttt{AES-128},[\cdot]_\tau\circ\texttt{SHA-256}]$, where the output of SHA is truncated to $\tau$ bits.
 
 ## SCB Parameters
@@ -71,7 +71,7 @@ The options and inputs follow the specification of `scb_file`, with the exceptio
 ### Dependencies
 
 The code only requires the [OpenSSL] library to be installed on the system (in addition to the standard C library).
-For windows, the script `compile.bat` assumes OpenSSL to be installed in `C:\openssl-3`.
+For Windows, the script `compile.bat` assumes OpenSSL to be installed in `C:\openssl-3`.
 
 The other two libraries used in this project are [hashmap.c] and [stb] (both also released under the MIT license), and the relevant files are included in the project.
 
